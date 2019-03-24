@@ -97,6 +97,8 @@ Gradle은 JCenter나 Maven Central, Ivy를 Gradle 레파지토리로 지원하�
 
 디폴트 저장소는 jCenter이다.
 
+----------
+
 
 **3) 모듈내에서의 Gradle 관련 파일**
 
@@ -195,7 +197,7 @@ buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러�
 
 
 
-
+----------
 
 **JCenter vs Maven Central**
 ------
