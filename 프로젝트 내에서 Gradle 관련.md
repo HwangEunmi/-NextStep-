@@ -175,7 +175,7 @@ SDK관리자를 사용하여 빌드 도구를 다운로드 할 수 있다.
 
 buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러가 컴파일 할 때의 버전이므로 compileSdkVersion과 buildToolsVersion은 서로 비슷하게 맞춰주는 것이 좋다.
 
-
+----------
 **3-5. defaultConfig{} 구역 :** 디폴트 셋팅과 모든 빌드 변수의 값들을 캡슐화 해놓은 구역이다.
 
 또한 이 구역은 AndroidManifest.xml에 있는 몇몇 속성들을 오버라이드 할 수 있다. (빌드 시스템에 의해서 동적으로 오버라이드 된다.)
@@ -189,7 +189,7 @@ buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러�
 **3-5-4. versionCode :** 버전 코드
 
 **3-5-5. versionName :** 버전명 (사용자들이 친숙하게 느낄 수 있는 버전 코드)
-
+----------
 **3-6. buildTypes{} 구역 :** 빌드 타입을 구성할 수 있는 구역이다.
 
 기본적으로 빌드 시스템은 debug와 release 두가지의 빌드 타입을 정의한다.
