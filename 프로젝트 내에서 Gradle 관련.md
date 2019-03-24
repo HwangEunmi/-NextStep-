@@ -265,9 +265,7 @@ implementation fileTree(include: ['*.jar'], dir: 'libs') // libs 폴더안에 �
 
 
 
-**새로운 라이브러리를 gradle에 추가했는데
-
-Cause: unable to find valid certification path to requested target 에러가 나는 경우**
+**새로운 라이브러리를 gradle에 추가했는데 Cause: unable to find valid certification path to requested target 에러가 나는 경우**
 ------
 
 유효한 인증서가 없기 때문이다.
