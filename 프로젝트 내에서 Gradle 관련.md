@@ -25,13 +25,13 @@
   - [프로젝트](#프로젝트-내에서-Gradle-관련-파일)
      - [1) settings.gradle 파일](#settings.gradle-파일)
      - [2) 루트 프로젝트 디렉토리의 build.gradle 파일 (최상위 빌드 파일)](#2)
-     - [3) 모듈내에서의 Gradle 관련 파일](#3)-모듈내에서의-Gradle-관련-파일)
+     - [3) 모듈내에서의 Gradle 관련 파일](#ㄱ)
   - [JCenter vs Maven Central](#JCenter-vs-Maven-Central)
   - [새로운 라이브러리를 추가하는 방법](#새로운-라이브러리를-추가하는-방법)
-     - [1) jar파일일 경우 (간단한 방법)](#1)-jar파일일-경우-(간단한-방법))
-     - [2) jar나 다른 라이브러리일 경우](#2)-jar나-다른-라이브러리일-경우)
+     - [1) jar파일일 경우 (간단한 방법)](#ㄱ)
+     - [2) jar나 다른 라이브러리일 경우](#ㄱ)
   - [.jar형 라이브러리를 앱에 적용할 때 새로운 라이브러리를 gradle에 추가했는데
-Cause: unable to find valid certification path to requested target 에러가 나는 경우](#.jar형-라이브러리를-앱에-적용할-때-새로운 라이브러리를-gradle에 추가했는데-Cause:-unable-to-find-valid-certification-path-to-requested-target-에러가-나는-경우)
+Cause: unable to find valid certification path to requested target 에러가 나는 경우](#ㄱ)
 
 
 ----------
@@ -73,27 +73,27 @@ buildscript {
  }
 ```
 
-2-1. buildscript{} 구역 : 프로젝트의 모든 모듈에 공통되는 Gradle 레파지토리와(라이브러리 땡겨오는)
+**2-1. buildscript{} 구역 :** 프로젝트의 모든 모듈에 공통되는 Gradle 레파지토리와(라이브러리 땡겨오는)
 
 종속성을 정의하기 위한 블록, 구역이다.
 
 프로젝트의 모든 모듈에 공통되는 구역이기 때문에 모듈의(ex. app) 개인 dependencies는 이 곳에 정의될 수 없다.
 
-2-2. repositories{} 구역 : dependencies 구역에 쓰여있는 라이브러리들을 찾거나 다운로드 하기 위한 Gradle 레파지토리를 정의한다.
+**2-2. repositories{} 구역 :** dependencies 구역에 쓰여있는 라이브러리들을 찾거나 다운로드 하기 위한 Gradle 레파지토리를 정의한다.
 
 Gradle은 JCenter나 Maven Central, Ivy를 Gradle 레파지토리로 지원하고 있다.
 
 또한 로컬 레파지토리나 자신의 소유의 서버 레파지토리도 정의할 수 있다.
 
 
-2-3. dependencies{} 구역 : 프로젝트가 빌드하기 위해 필요한 Gradle 정보를 넣는 구역이다.
+**2-3. dependencies{} 구역 :** 프로젝트가 빌드하기 위해 필요한 Gradle 정보를 넣는 구역이다.
 
 참고로 classpath 'com.android.tools.build:gradle:3.3.0'은 버전 3.3.0의 그래들을 위한 안드로이드 플러그인이다.
 
 (플러그인 : 일반적인 소프트웨어의 일부로, 외부 기술의 일종이다. 즉, 쉽게 설치되고 사용될 수 있는 프로그램을 말한다.)
 
 
-2-4. allprojects{} 구역 : 프로젝트 내의 모든 모듈의 dependencies와 저장소들을 사용하기 위해 정의하는 구역이다.
+**2-4. allprojects{} 구역 :** 프로젝트 내의 모든 모듈의 dependencies와 저장소들을 사용하기 위해 정의하는 구역이다.
 
 디폴트 저장소는 jCenter이다.
 
@@ -151,17 +151,17 @@ apply plugin: 'com.android.application'
 ```
 
 
-3-1. apply plugin : Android 플러그인을 적용한다.
+**3-1. apply plugin :** Android 플러그인을 적용한다.
 
 Gradle은 이것을 빌드하고 android{} 구역을 이용할 수 있도록 만든다.
 
-3-2. android{}구역 : 모듈의 Android 관련 설정을 구성하는 공간이다.
+**3-2. android{}구역 :** 모듈의 Android 관련 설정을 구성하는 공간이다.
 
-3-3. compileSdkVersion : Gradle이 앱을 컴파일 할 때 사용해야 할 Android API 레벨을 지정한다.
+**3-3. compileSdkVersion :** Gradle이 앱을 컴파일 할 때 사용해야 할 Android API 레벨을 지정한다.
 
 이 말인 즉슨, 앱은 이 API 레벨과 해당 API 레벨보다 낮은 API의 특징을 사용할 수 있다는 것이다.
 
-3-4. buildToolsVersion : Gradle이 앱을 빌드할 때 사용해야 하는 컴파일러의 버전 및 SDK 빌드 도구를 지정한다.
+**3-4. buildToolsVersion :** Gradle이 앱을 빌드할 때 사용해야 하는 컴파일러의 버전 및 SDK 빌드 도구를 지정한다.
 
 SDK관리자를 사용하여 빌드 도구를 다운로드 할 수 있다.
 
@@ -174,21 +174,21 @@ SDK관리자를 사용하여 빌드 도구를 다운로드 할 수 있다.
 buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러가 컴파일 할 때의 버전이므로 compileSdkVersion과 buildToolsVersion은 서로 비슷하게 맞춰주는 것이 좋다.
 
 
-3-5. defaultConfig{} 구역 : 디폴트 셋팅과 모든 빌드 변수의 값들을 캡슐화 해놓은 구역이다.
+**3-5. defaultConfig{} 구역 :** 디폴트 셋팅과 모든 빌드 변수의 값들을 캡슐화 해놓은 구역이다.
 
 또한 이 구역은 AndroidManifest.xml에 있는 몇몇 속성들을 오버라이드 할 수 있다. (빌드 시스템에 의해서 동적으로 오버라이드 된다.)
 
-3-5-1. applicationId : 앱을 출시하기 위하여, 자신을 나타낼 수 있는 유니크한 값이다.
+**3-5-1. applicationId :** 앱을 출시하기 위하여, 자신을 나타낼 수 있는 유니크한 값이다.
 
-3-5-2. minSdkVersion : 앱을 구동하기 위해 필요한 최소 API 레벨이다.
+**3-5-2. minSdkVersion :** 앱을 구동하기 위해 필요한 최소 API 레벨이다.
 
-3-5-3. targetSdkVersion : 앱을 테스트했었던 API 레벨이다. (기준)
+**3-5-3. targetSdkVersion :** 앱을 테스트했었던 API 레벨이다. (기준)
 
-3-5-4. versionCode : 버전 코드
+**3-5-4. versionCode :** 버전 코드
 
-3-5-5. versionName : 버전명 (사용자들이 친숙하게 느낄 수 있는 버전 코드)
+**3-5-5. versionName :** 버전명 (사용자들이 친숙하게 느낄 수 있는 버전 코드)
 
-3-6. buildTypes{} 구역 : 빌드 타입을 구성할 수 있는 구역이다.
+**3-6. buildTypes{} 구역 :** 빌드 타입을 구성할 수 있는 구역이다.
 
 기본적으로 빌드 시스템은 debug와 release 두가지의 빌드 타입을 정의한다.
 
@@ -224,11 +224,11 @@ libs 폴더에 jar파일을 넣는다 -> 우클릭해서 Add As library를 누�
 
 File > Project Structure를 누른다 -> Dependencies 탭을 누른 후, + 버튼을 누른다.
 
-2-1. jcenter에 있는 라이브러리인 경우
+**2-1. jcenter에 있는 라이브러리인 경우**
 
 Library dependency를 누르고 검색창에 해당 라이브러리 명을 검색한 후 ok를 눌러서 Gradle에 추가한다.
 
-2-2. jar파일인 경우
+**2-2. jar파일인 경우**
 
 Jar dependency를 누르고 해당 경로를 선택한 후 추가한다. (이 방법보다 보통 간단한 방법을 사용한다.)
 
@@ -299,12 +299,12 @@ Caused by : org.gradle.api.resource.ResourceException : Could not get resource '
 
 Tools > Server Certificates 또는, 검색창에 Certificates라고 검색한다.
 
-여기서 상단에 Accepted certificates라는 구역이 있는데, 여기서 + 버튼을 누른다. 
+여기서 상단에 Accepted certificates라는 구역이 있는데, 여기서 '+ 버튼'을 누른다. 
 
 
 (Accepted certificates 구역은 이 구역에 있는 인증서들이 현재 안드로이드 스튜디오에서 유효한 상태에 있는 인증서들이다.)
 
-+ 버튼을 눌러서 뜬 창에서 아까 전의 인증서 경로를 찾은 후, apply 시키고 ok 버튼을 누른다.
+'+ 버튼'을 눌러서 뜬 창에서 아까 전의 인증서 경로를 찾은 후, apply 시키고 ok 버튼을 누른다.
 
 이를 통해서 성공적으로 유효한 인증서를 등록할 수 있다.
 
