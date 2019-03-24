@@ -189,7 +189,7 @@ buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러�
 **3-5-4. versionCode :** 버전 코드
 
 **3-5-5. versionName :** 버전명 (사용자들이 친숙하게 느낄 수 있는 버전 코드)
-----------
+
 **3-6. buildTypes{} 구역 :** 빌드 타입을 구성할 수 있는 구역이다.
 
 기본적으로 빌드 시스템은 debug와 release 두가지의 빌드 타입을 정의한다.
