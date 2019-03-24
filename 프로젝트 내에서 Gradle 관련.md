@@ -81,6 +81,8 @@ buildscript {
 
 프로젝트의 모든 모듈에 공통되는 구역이기 때문에 모듈의(ex. app) 개인 dependencies는 이 곳에 정의될 수 없다.
 
+
+------
 **2-2. repositories{} 구역 :** 
 
 dependencies 구역에 쓰여있는 라이브러리들을 찾거나 다운로드 하기 위한 Gradle 레파지토리를 정의한다.
