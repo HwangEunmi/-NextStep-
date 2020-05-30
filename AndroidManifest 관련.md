@@ -47,9 +47,6 @@ https://codelabs.developers.google.com/codelabs/android-training-hello-world/ind
 
 
 **AndroidManifest.xml 란?**
-------------------------------------------
-
-
 ----------
 
 AndroidManifest 은 앱에 관한 필수 정보를 가지고 있는 파일이다. 
