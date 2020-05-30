@@ -71,12 +71,24 @@ Gradle과 Gradle용 Android 플러그인은 안드로이드 스튜디오와 독�
 
 빌드 프로세스란 프로젝트를 APK로 변환해주는 과정을 말한다.
 
+![BuildProcess](/image/BuildProcess.PNG)
+
+1. 컴파일러는 소스코드를 DEX파일로 변환한다. 그리고 그 외의 모든 것을 컴파일된 리소스로 변환한다.
+
+2. APK Packager는 DEX파일과 컴파일된 리소스를 APK로 만든다. 
+
+3. 앱을 기기에 설치하려면 APK에 서명이 되어있어야 한다. 
+
+4. 그러므로 APK Packager는 Debug/Release 키 저장소를 사용하여 APK에 서명한다. 
+
+5. 빌드 프로세스가 끝나면 APK가 생성된다.
+
 
 
 **프로젝트 내에서 Gradle 관련 파일**
 ------
 
-**1) settings.gradle 파일**
+**01.settings.gradle 파일**
 
 앱을 빌드할때 어떤 모듈을 포함할지 Gradle에 알려준다.
 
