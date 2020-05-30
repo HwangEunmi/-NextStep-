@@ -43,7 +43,7 @@ https://codelabs.developers.google.com/codelabs/android-training-hello-world/ind
        - [local.properties](#local.properties)      
   - [JCenter vs Maven Central](#JCenter-vs-Maven-Central)
   - [새로운 라이브러리를 추가하는 방법](#새로운-라이브러리를-추가하는-방법)
-     - [01.jar파일일 경우 (간단한 방법)](#01.jar파일일 경우-(간단한-방법))
+     - [01.jar파일일 경우 (간단한 방법)](#)
      - [02.jar나 다른 라이브러리일 경우](#02.jar나-다른-라이브러리일-경우)
   - [.jar형 라이브러리를 앱에 적용할 때 새로운 라이브러리를 gradle에 추가했는데
 Cause: unable to find valid certification path to requested target 에러가 나는 경우](#ㄱ)
