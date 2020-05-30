@@ -42,6 +42,10 @@ https://codelabs.developers.google.com/codelabs/android-training-hello-world/ind
        - [gradle.properties](#gradle.properties)      
        - [local.properties](#local.properties)      
   - [JCenter vs Maven Central](#JCenter-vs-Maven-Central)
+  - [Dex 파일이란?](#Dex-파일이란?)
+  - [JVM과 DVM의 차이점](#JVM과-DVM의-차이점)
+  - [MultiDex란?](#MultiDex란?)
+  - [Proguard란?](#Proguard란?)
   - [새로운 라이브러리를 추가하는 방법](#새로운-라이브러리를-추가하는-방법)
      - [01.jar파일일 경우 (간단한 방법)](#)
      - [02.jar나 다른 라이브러리일 경우](#02.jar나-다른-라이브러리일-경우)
@@ -309,6 +313,7 @@ APPLICATION_ID=com.test.emhwang
 sdk.dir=C\:\\Users\\cncn6\\AppData\\Local\\Android\\Sdk
 ```
 
+
 ----------
 
 **JCenter vs Maven Central**
@@ -324,6 +329,113 @@ jcenter()는 mavenCentral()의 상위 개념이라고 볼 수 있는데, 왜냐�
 이는 jcenter()가 mavenCentral()보다 성능 및 메모리 사용면에서 우수하기 때문이다.
 
 jcenter()는 https프로토콜을 사용하므로 높은 보안을 유지하는데, mavenCentral()은 http프로토콜을 사용하여 상대적으로 낮은 보안을 유지한다.
+
+
+----------
+
+**Dex 파일이란?**
+------
+
+Dex파일이란 JAVA 코드로 작성되어 컴파일 된 클래스 파일을 DX(Android DX Tool)도구를 사용해 변환한 파일이다. 
+
+이 과정에서 JAVA 바이트 코드들은 Dalvik 바이트 코드로 변환되며, 여러 클래스 파일에 들어있는 중복된 코드들을 재사용하기 때문에
+
+.JAR파일에 비해 크기가 줄어든다. 
+
+즉, DVM(Dalvik Virtual Machine)을 위한 실행파일이다. 
+
+
+----------
+
+**JVM과 DVM의 차이점**
+------
+
+JVM과 DVM은 엄밀히 말하면 다르다. 
+
+Android는 자바를 사용하지만, Android SDK로는 자바소스를 Dalvik 바이트코드로 직접 컴파일할 수 없다. 
+
+따라서 Android SDK에 DX라는 툴을 이용하여 자바 바이트코드를 Dalvik 바이트코드로 변환한다. 
+
+즉, 여러개의 .class 파일들을 DX툴을 이용하여 하나의 .dex 파일로 변환하는 것이다. 
+
+.dex파일은 DVM(Dalvik Virtual Machine)을 위한 실행파일이며, 즉 Android는 JVM을 사용하지 않는다 라는 것이다.
+
+
+----------
+
+**MultiDex란?**
+------
+
+안드로이드 앱을 구성하는 코드는 컴파일되어 Dex파일로 만들어진다. 
+
+이때 Dex 포맷의 제한으로 인해 하나의 Dex 파일에는 최대 65536개의 메소드 참조만 저장될 수 있다. 
+
+하지만 일반적으로 큰 규모의 앱을 작성하다보면 이러한 메소드 제한을 훌쩍 뛰어넘게 된다.
+
+그러한 경우 빌드시 Dex에 대한 에러 메시지가 표시된다.
+
+이럴때 MultiDex를 사용하면 Dex파일을 여러개로 나누어 이러한 문제를 피할 수 있다. 
+
+하지만 MultiDex를 남발하면 안된다. 
+
+------
+
+물론 MultiDex를 사용하면 큰 어려움없이 큰 규모의 앱을 빌드할 수 있다. 
+
+하지만 빌드과정에선 앱 내에서 사용하는 클래스를 여러개의 Dex파일로 나눠야 하며, 이를 위해 별도의 분석 작업이 추가되므로 빌드 속도가 느려지게 된다.
+
+또한, 실제로 앱에서 사용하지 않는 클래스들도 모두 포함하므로 APK의 용량도 늘어나게 된다. 
+
+즉, 개발자와 사용자 모두에게 좋지 않은 영향을 준다. 
+
+이때 Proguard를 사용하면 기본적으로 사용하지 않는 클래스들을 제거해주므로, 메소드의 갯수를 줄일 수 있다. 
+
+
+----------
+
+**Proguard란?**
+------
+
+Proguard는 코드 난독화를 통해 디컴파일시 본인의 코드가 노출되는 것을 방지하며, 또한 불필요한 메소드를 제거하여 MultiDex를 피할 수 있다. 
+
+그런데 난독화를 수행한다는 것은 클래스 내 파일 이름이나 라인 넘버등의 정보도 모두 제거하므로 디버그가 어렵다. 
+
+그래서 보통 Debug 빌드일땐 난독화를 하지 않는다. 
+
+
+```java
+    buildTypes {
+        debug {
+            // Proguard 비활성화
+            minifyEnabled false
+            // 기본 Proguard 설정
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            // Proguard 비활성화
+            minifyEnabled true
+            // 기본 Proguard 설정
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+```  
+
+build.gradle (:app) 에서 보면 위와 같이 Proguard 코드를 확인할 수 있다. Debug 빌드일땐 Proguard 비활성화를 하여 
+
+난독화 및 라인이 지워지는 것을 방지하고, Release 빌드일땐 Proguard 활성화를 하여 난독화를 진행한다. 
+
+만약 프로젝트 상에서 라이브러리를 사용하는 경우, 라이브러리에 대한 예외처리를 따로 해줘야 한다. 
+
+보통 해당 라이브러리의 홈페이지에 보면 Proguard 설정하는 법이 나와 있다. (Ex. Retrofit2, Glide ..)
+
+이렇게 Proguard를 적용할때는 먼저 사용중인 라이브러리가 잘 작동되는지 하나하나 확인해봐야 한다. 
+
+라이브러리 자체에 Proguard 설정이 없다면 프로젝트가 난독화 되면서 제대로 동작하지 않을 수 있기 때문이다. 
+
+Proguard 설정 규칙에 대한 자세한 내용은 아래 URL를 참고하면 된다.
+
+참고 URL : https://black-jin0427.tistory.com/m/249
+
 
 
 
