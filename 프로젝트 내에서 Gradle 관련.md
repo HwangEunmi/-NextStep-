@@ -3,14 +3,24 @@
 **프로젝트 소개**
 -------
 
-안드로이드에서의 빌드 툴은 Gradle입니다.
-안드로이드 스튜디오를 사용하면서 Gradle에 대해 잘 알지 못하는 경우가 많은데요.
-그래서 정리해보았습니다.
+Google Developer Training 1.1 을 보다 AndroidManifest.xml과 Gradle에 관한 내용이 나왔습니다.
+
+그래서 두 내용을 정리해보았습니다.
+
+다음은 Gradle에 관한 내용입니다.
 
 내용중에 Gradle과 상관없는 내용이 있을 수도 있습니다. 그런 내용은 제가 공부하면서 궁금한 점이 꼬리에 꼬리를 물었기때문에 같이 정리해서 그렇습니다.
 그런 내용은 Skip 하셔도 됩니다!
 
 프로젝트는 지속적으로 추가 될 예정입니다. 상단의 Star, Watching 버튼을 클릭하시면 구독 알림을 받으실 수 있습니다 :)
+
+----------
+
+[Google Developer Training 1.1 URL] 
+
+https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/unit-1-get-started/lesson-1-build-your-first-app/1-1-c-your-first-android-app/1-1-c-your-first-android-app.html
+
+https://codelabs.developers.google.com/codelabs/android-training-hello-world/index.html?index=..%2F..%2Fandroid-training#2
 
 
 ----------
@@ -22,14 +32,19 @@
  - [프로젝트 소개](#프로젝트-소개)
  - [목차](#목차)
  - [전체 플로우](#전체-플로우)
-  - [프로젝트](#프로젝트-내에서-Gradle-관련-파일)
-     - [1) settings.gradle 파일](#settings.gradle-파일)
-     - [2) 루트 프로젝트 디렉토리의 build.gradle 파일 (최상위 빌드 파일)](#2)
-     - [3) 모듈내에서의 Gradle 관련 파일](#ㄱ)
+  - [Gradle](#Gradle)
+  - [빌드 프로세스](#빌드-프로세스)
+  - [프로젝트 내에서의 Gradle 설정파일](#프로젝트-내에서의-Gradle-설정파일)
+     - [01.settings.gradle 파일](#settings.gradle-파일)
+     - [02.루트 프로젝트 디렉토리의 build.gradle 파일 (최상위 빌드 파일)](#02.루트-프로젝트-디렉토리의-build.gradle-파일-(최상위-빌드-파일))
+     - [03.모듈내에서의 Gradle 관련 파일](#03.모듈내에서의-Gradle-관련-파일)
+     - [04.Gradle 속성 파일](#04.Gradle-속성-파일)
+       - [gradle.properties](#gradle.properties)      
+       - [local.properties](#local.properties)      
   - [JCenter vs Maven Central](#JCenter-vs-Maven-Central)
   - [새로운 라이브러리를 추가하는 방법](#새로운-라이브러리를-추가하는-방법)
-     - [1) jar파일일 경우 (간단한 방법)](#ㄱ)
-     - [2) jar나 다른 라이브러리일 경우](#ㄱ)
+     - [01.jar파일일 경우 (간단한 방법)](#01.jar파일일 경우-(간단한-방법))
+     - [02.jar나 다른 라이브러리일 경우](#02.jar나-다른-라이브러리일-경우)
   - [.jar형 라이브러리를 앱에 적용할 때 새로운 라이브러리를 gradle에 추가했는데
 Cause: unable to find valid certification path to requested target 에러가 나는 경우](#ㄱ)
 
@@ -38,6 +53,25 @@ Cause: unable to find valid certification path to requested target 에러가 나
 
 **전체 플로우**
 ----------
+
+**Gradle**
+------
+
+안드로이드 스튜디오는 Gradle을 이용하여 빌드 프로세스를 자동화한다. 
+
+Gradle은 빌드 프로세스를 자동화하고 관리하는 한편, 개발자가 유연하게 맞춤형 빌드 구성을 정의할 수 있다. 
+
+Gradle과 Gradle용 Android 플러그인은 안드로이드 스튜디오와 독립적으로 실행된다. 
+
+때문에 빌드 도구를 별도로 업데이트 해야 한다. 
+
+
+**빌드 프로세스**
+------
+
+빌드 프로세스란 프로젝트를 APK로 변환해주는 과정을 말한다.
+
+
 
 **프로젝트 내에서 Gradle 관련 파일**
 ------
