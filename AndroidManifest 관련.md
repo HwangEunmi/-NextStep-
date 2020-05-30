@@ -32,7 +32,7 @@ https://codelabs.developers.google.com/codelabs/android-training-hello-world/ind
   - [AndroidManifest.xml 란?](#안AndroidManifest.xml-란?)
      - [01.앱의 패키지 이름](#01.앱의-패키지-이름)
      - [02.앱의 구성요소](#02.앱의-구성요소)
-        - [번외) Intent 란?](#번외)-Intent-란?)
+        - [번외) Intent 란?](#)
         - [번외) 명시적 인텐트](#번외)명시적-인텐트)
         - [번외) 암시적 인텐트](#번외)-암시적-인텐트)
      - [03.앱이 다른 부분에 액세스하기 위해 필요한 권한](#03.앱이-다른-부분에-액세스하기-위해-필요한-권한)
