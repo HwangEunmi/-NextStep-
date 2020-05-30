@@ -106,6 +106,8 @@ Gradle과 Gradle용 Android 플러그인은 안드로이드 스튜디오와 독�
 include ':app'
 ```
 
+----------
+
 **02.루트 프로젝트 디렉토리의 build.gradle 파일 (최상위 빌트 파일)**
 
 프로젝트의 모든 모듈에 적용되는 빌드 구성을 정의한다.
@@ -288,6 +290,8 @@ buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러�
 
 기본적으로 빌드 시스템은 debug와 release 두가지의 빌드 타입을 정의한다.
 
+
+----------
 
 **04.Gradle 속성 파일**
 
