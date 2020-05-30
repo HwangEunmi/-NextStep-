@@ -88,32 +88,41 @@ Gradle과 Gradle용 Android 플러그인은 안드로이드 스튜디오와 독�
 **프로젝트 내에서 Gradle 관련 파일**
 ------
 
+![Directory](/image/Directory.PNG)
+
+위의 그림은 안드로이드 앱의 기본 프로젝트 구조이다. 
+
 **01.settings.gradle 파일**
 
 앱을 빌드할때 어떤 모듈을 포함할지 Gradle에 알려준다.
+
+일반적인 경우엔 아래와 같이 포함한다.
 
 ```java
 include ':app'
 ```
 
-**2) 루트 프로젝트 디렉토리의 build.gradle 파일 (최상위 빌트 파일)**
+**01.루트 프로젝트 디렉토리의 build.gradle 파일 (최상위 빌트 파일)**
 
 프로젝트의 모든 모듈에 적용되는 빌드 구성을 정의한다.
 
+즉, 프로젝트의 모든 모듈에 공통되는 Gradle 저장소와 종속성을 정의한다.
 
 ```java
 buildscript {
       repositories {
+           google()
            jcenter()
       }
 
       dependencies {
-           classpath 'com.android.tools.build:gradle:3.3.0'
+           classpath 'com.android.tools.build:gradle:3.6.3'
       }
   }
 
   allprojects {
     repositories {
+        google()
         jcenter()
     }
  }
@@ -136,6 +145,8 @@ Gradle은 JCenter나 Maven Central, Ivy를 Gradle 레파지토리로 지원하�
 
 또한 로컬 레파지토리나 자신의 소유의 서버 레파지토리도 정의할 수 있다.
 
+참고로 안드로이드 스튜디오 3.0 이상이라면 Google의 Maven 저장소를 포함해야한다.
+
 
 **2-3. dependencies{} 구역 :** 
 
@@ -155,7 +166,7 @@ Gradle은 JCenter나 Maven Central, Ivy를 Gradle 레파지토리로 지원하�
 ----------
 
 
-**3) 모듈내에서의 Gradle 관련 파일**
+**03.모듈내에서의 Gradle 관련 파일**
 
 이 파일(build.gradle)이 위치하는 특정 모듈의 빌드 설정을 구성할 수 있으며, AndroidManifest 또는 최상위 build.gradle 파일에 있는 설정을 재정의할 수 있다.
 
@@ -164,31 +175,31 @@ Gradle은 JCenter나 Maven Central, Ivy를 Gradle 레파지토리로 지원하�
 apply plugin: 'com.android.application' 
 
       android {
-          compileSdkVersion 28
-          buildToolsVersion "28.0.3"
+          compileSdkVersion 29
+          buildToolsVersion "29.0.3"
 
       defaultConfig {
-        applicationId 'com.example.myapp'
-        minSdkVersion 15
-        targetSdkVersion 28
+        applicationId 'com.test.emhwang'
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
      }
 
       buildTypes {
          release {
-             minifyEnabled true // Enables code shrinking for the release build type.
+             minifyEnabled true 
              proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
          }
       }
 
       productFlavors {
         free {
-          applicationId 'com.example.myapp.free'
+          applicationId 'com.test.emhwang.free'
         }
         
         paid {
-          applicationId 'com.example.myapp.paid'
+          applicationId 'com.test.emhwang.paid'
        }
      }
      
@@ -201,9 +212,11 @@ apply plugin: 'com.android.application'
     }
 
     dependencies {
-         compile project(":lib")
-         compile 'com.android.support:appcompat-v7:28.0.0'
-         compile fileTree(dir: 'libs', include: ['*.jar'])
+       implementation fileTree(dir: 'libs', include: ['*.jar'])
+       implementation 'androidx.appcompat:appcompat:1.0.2'
+       testImplementation 'junit:junit:4.12'
+       androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+       androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     }
 ```
 
@@ -272,7 +285,29 @@ buildToolsVersion은 컴파일러의 버전, compileSdkVersion은 컴파일러�
 기본적으로 빌드 시스템은 debug와 release 두가지의 빌드 타입을 정의한다.
 
 
+**04.Gradle 속성 파일**
 
+**4-1. gradle.properties :** 
+
+프로젝트 범위의 Gradle 설정을 구성할 수 있다. 
+
+```java
+COMPILE_SDK_VERSION=android-29
+BUILD_TOOL_VERSION=29.0.3
+MIN_SDK_VERSION=21
+TARGET_SDK_VERSION=29
+APPLICATION_ID=com.test.emhwang
+...
+
+```
+
+**4-2. local.properties :** 
+
+빌드 시스템의 로컬 환경을 구성한다.
+
+```java
+sdk.dir=C\:\\Users\\cncn6\\AppData\\Local\\Android\\Sdk
+```
 
 ----------
 
